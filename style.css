@@ -1,0 +1,325 @@
+/* ============================
+   Base / Reset
+   ============================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background: #f0f0f0;
+  color: #222;
+  padding: 24px;
+}
+
+/* ============================
+   Config Panel
+   ============================ */
+.config-panel {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 680px;
+  margin: 0 auto 32px;
+}
+
+.config-panel h2 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.config-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 18px;
+  align-items: flex-end;
+}
+
+.config-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.config-group label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.operations-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.operations-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  cursor: pointer;
+  color: #222;
+}
+
+.operations-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+select, input[type="number"] {
+  padding: 7px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fafafa;
+  width: 100%;
+}
+
+select {
+  width: auto;
+  min-width: 140px;
+}
+
+input[type="number"] {
+  width: 80px;
+}
+
+.custom-range {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.custom-range .config-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-range label {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+button {
+  padding: 10px 22px;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.15s;
+}
+
+.btn-generate {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-generate:hover {
+  background: #1d4ed8;
+}
+
+.btn-print {
+  background: #16a34a;
+  color: #fff;
+}
+
+.btn-print:hover {
+  background: #15803d;
+}
+
+.btn-print:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  color: #dc2626;
+  font-size: 0.88rem;
+  margin-top: 10px;
+  min-height: 1.2em;
+}
+
+/* ============================
+   Worksheet
+   ============================ */
+.worksheet {
+  background: #fff;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 32px 40px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.worksheet.empty {
+  text-align: center;
+  padding: 60px 40px;
+  color: #aaa;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.worksheet-header {
+  border-bottom: 2px solid #222;
+  padding-bottom: 16px;
+  margin-bottom: 28px;
+}
+
+.worksheet-header h1 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.student-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 0.95rem;
+}
+
+.student-info span {
+  flex: 1;
+  border-bottom: 1px solid #222;
+  padding-bottom: 2px;
+}
+
+/* ============================
+   Problem Grid
+   ============================ */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px 24px;
+}
+
+.problem-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.problem-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Individual problem — column arithmetic layout */
+.problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 1.1rem;
+  font-family: 'Courier New', monospace;
+  min-width: 80px;
+  counter-increment: problem-counter;
+  position: relative;
+  padding-top: 14px;
+}
+
+.problem-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 0.7rem;
+  color: #888;
+  font-family: 'Georgia', serif;
+}
+
+.problem .operand-a {
+  padding-right: 4px;
+}
+
+.problem .operand-b-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding-right: 4px;
+}
+
+.problem .operator {
+  color: #444;
+  font-weight: bold;
+  min-width: 14px;
+}
+
+.problem-line {
+  width: 100%;
+  border-top: 2px solid #222;
+  margin: 4px 0;
+}
+
+.problem-answer {
+  width: 100%;
+  height: 28px;
+  border-bottom: 1px solid #aaa;
+}
+
+/* ============================
+   Print Styles
+   ============================ */
+@media print {
+  body {
+    background: #fff;
+    padding: 0;
+  }
+
+  .config-panel {
+    display: none;
+  }
+
+  .worksheet {
+    border: none;
+    border-radius: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .worksheet.empty {
+    display: none;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 1.5cm 2cm;
+  }
+
+  .problem {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .problem-answer {
+    border-bottom: 1px solid #222;
+  }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arithmetic Worksheet Printer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Config Panel (hidden when printing) -->
+  <div class="config-panel" id="config-form">
+    <h2>Arithmetic Worksheet Printer</h2>
+
+    <div class="config-row">
+      <div class="config-group">
+        <label>Operations</label>
+        <div class="operations-group">
+          <label><input type="checkbox" id="op-add" checked /> Addition (+)</label>
+          <label><input type="checkbox" id="op-sub" checked /> Subtraction (−)</label>
+          <label><input type="checkbox" id="op-mul" checked /> Multiplication (×)</label>
+          <label><input type="checkbox" id="op-div" checked /> Division (÷)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="config-row">
+      <div class="config-group">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty">
+          <option value="easy">Easy (1–10)</option>
+          <option value="medium" selected>Medium (1–12)</option>
+          <option value="hard">Hard (5–20)</option>
+          <option value="custom">Custom…</option>
+        </select>
+      </div>
+
+      <div class="custom-range hidden" id="custom-range">
+        <div class="config-group">
+          <label for="min-operand">Min</label>
+          <input type="number" id="min-operand" value="1" min="0" max="999" />
+        </div>
+        <div class="config-group">
+          <label for="max-operand">Max</label>
+          <input type="number" id="max-operand" value="12" min="1" max="999" />
+        </div>
+      </div>
+
+      <div class="config-group">
+        <label for="count">Problems</label>
+        <input type="number" id="count" value="20" min="1" max="60" />
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-generate" id="btn-generate">Generate</button>
+      <button class="btn-print" id="btn-print" disabled>Print</button>
+    </div>
+
+    <p class="error-msg" id="error-msg"></p>
+  </div>
+
+  <!-- Worksheet output -->
+  <div class="worksheet empty" id="worksheet">
+    Click <strong>Generate</strong> to create a worksheet.
+  </div>
+
+  <script src="generator.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
