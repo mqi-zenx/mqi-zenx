@@ -1,6 +1,5 @@
 - 👋 Hi, I’m @mqi-zenx
-- 👀 I’m interested in learning Javascript, Solidity and GraphQL
-- 🌱 I’m currently learning Javascript
+- 👀 I’m interested in learning programming in the age of AI.
 - 💞️ I’m looking to collaborate on blockchain related projects
 - 📫 How to reach me: mqi@zenxtech.com.au
 
