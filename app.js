@@ -8,7 +8,7 @@ const PRESETS = {
   hard:   { min: 5,  max: 20 },
 };
 
-const OP_LABELS = { '+': 'Addition', '-': 'Subtraction', '×': 'Multiplication', '÷': 'Division' };
+const OP_LABELS = { '+': 'Addition', '-': 'Subtraction', '×': 'Multiplication', '÷': 'Division', 'L': 'Long Division' };
 
 // DOM refs
 const form          = document.getElementById('config-form');
@@ -38,9 +38,9 @@ generateBtn.addEventListener('click', () => {
   errorMsg.textContent = '';
 
   // Read selected operations
-  const operations = ['op-add', 'op-sub', 'op-mul', 'op-div']
+  const operations = ['op-add', 'op-sub', 'op-mul', 'op-div', 'op-ldiv']
     .filter(id => document.getElementById(id).checked)
-    .map(id => ({ 'op-add': '+', 'op-sub': '-', 'op-mul': '×', 'op-div': '÷' }[id]));
+    .map(id => ({ 'op-add': '+', 'op-sub': '-', 'op-mul': '×', 'op-div': '÷', 'op-ldiv': 'L' }[id]));
 
   if (operations.length === 0) {
     errorMsg.textContent = 'Please select at least one operation.';
@@ -77,18 +77,34 @@ function renderWorksheet(problems, operations) {
   if (problems.length <= 10) colClass = 'cols-2';
   else if (problems.length <= 18) colClass = 'cols-3';
 
-  const problemsHTML = problems.map((p, i) => `
-    <div class="problem">
-      <span class="problem-number">${i + 1}</span>
-      <span class="operand-a">${p.operandA}</span>
-      <div class="operand-b-row">
-        <span class="operator">${p.operator}</span>
-        <span class="operand-b">${p.operandB}</span>
+  const problemsHTML = problems.map((p, i) => {
+    if (p.operator === 'L') {
+      return `
+        <div class="problem long-division">
+          <span class="problem-number">${i + 1}</span>
+          <div class="ld-answer-line"></div>
+          <div class="ld-body">
+            <span class="ld-divisor">${p.operandB}</span>
+            <div class="ld-bracket">
+              <span class="ld-dividend">${p.operandA}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="problem">
+        <span class="problem-number">${i + 1}</span>
+        <span class="operand-a">${p.operandA}</span>
+        <div class="operand-b-row">
+          <span class="operator">${p.operator}</span>
+          <span class="operand-b">${p.operandB}</span>
+        </div>
+        <div class="problem-line"></div>
+        <div class="problem-answer"></div>
       </div>
-      <div class="problem-line"></div>
-      <div class="problem-answer"></div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 
   worksheet.className = 'worksheet';
   worksheet.innerHTML = `
